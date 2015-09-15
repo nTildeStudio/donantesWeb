@@ -1,1 +1,30 @@
-Hola donantes
+<html>
+	<head>
+		<script type="text/javascript" src="js/parse-1.6.0.js"></script>
+		<script type="text/javascript" src="js/init-parse.js"></script>
+		<script>
+			function sendPush(to){
+				var query = new Parse.Query(Parse.Installation);
+				query.equalTo('numeroDonante', to);
+				Parse.Push.send({
+				  where: query,
+				  data: {
+					alert: "Test push web"
+				  }
+				}, {
+				  success: function() {
+					alert('push ok');
+				  },
+				  error: function(error) {
+					alert('ko');
+				  }
+				});
+			}
+		</script>
+	</head>
+	<body>
+		<button onclick="sendPush('julio')">Push Julio</button>
+		<button onclick="sendPush('emanuel')">Push Emanuel</button>
+		<button onclick="sendPush('carlos')">Push Carlos</button>
+	</body>
+</html>
